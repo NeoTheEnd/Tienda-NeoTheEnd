@@ -1,0 +1,59 @@
+<!-- 6.-historial.html-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Historial de Compras</title>
+  <link rel="stylesheet" href="principal.css">
+</head>
+<body>
+  <header>
+    <h1>Historial de Compras</h1>
+  </header>
+
+  <main>
+    <section id="historial">
+      <h2>🧾 Tus Compras</h2>
+      <div id="lista-historial"></div>
+    </section>
+
+    <section style="text-align:center; margin-top:20px;">
+      <button onclick="cerrarSesion()">Cerrar sesión</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Tienda de Juegos - NeoTheEnd</p>
+  </footer>
+
+  <script>
+    const usuarioHistorial = JSON.parse(localStorage.getItem("usuario_actual"));
+    const historial = usuarioHistorial?.historial || [];
+
+    const contenedor = document.getElementById("lista-historial");
+    if (historial.length === 0) {
+      contenedor.innerHTML = "<p>No hay compras registradas.</p>";
+    } else {
+      historial.forEach((compra, i) => {
+        const div = document.createElement("div");
+        div.innerHTML = `
+          <p><strong>Compra #${i + 1}</strong> - ${compra.fecha}</p>
+          <ul>
+            ${compra.productos.map(p => `<li>${p.titulo} - ${p.precio} Bs</li>`).join("")}
+          </ul>
+          <p><strong>Total:</strong> ${compra.total} Bs</p>
+          <hr>
+        `;
+        contenedor.appendChild(div);
+      });
+    }
+
+    function cerrarSesion() {
+      localStorage.removeItem("usuario_actual");
+      alert("Sesión cerrada.");
+      window.location.href = "registro.html";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,616 @@
+/* 8.-css principal */
+/* ============ RESET GENERAL ============ */
+/* Se restablecen márgenes, padding y el box-sizing para todos los elementos */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ========================= BODY ========================= */
+/* Establece el estilo base para el cuerpo del documento */
+body {
+  font-family: 'Poppins', sans-serif; /* Fuente */
+  background-color: #1f1f2e; /* Color de fondo */
+  color: #ffffffcc; /* Color de texto */
+  line-height: 1.6; /* Altura de línea */
+  font-size: 16px; /* Tamaño de fuente */
+  text-align: center; /* Alineación de texto */
+}
+
+/* ========================= SCROLLBAR ========================= */
+/* Personaliza el estilo de la barra de desplazamiento */
+::-webkit-scrollbar {
+  width: 8px; /* Ancho de la barra */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6c5ce7; /* Color de la parte interactiva de la barra */
+  border-radius: 10px; /* Bordes redondeados */
+}
+
+/* ========================= HEADER ========================= */
+/* Estilos para la cabecera */
+header {
+  background: linear-gradient(to right, #6c5ce7, #00cec9); /* Fondo con gradiente */
+  color: white; /* Color de texto */
+  padding: 30px 20px; /* Espaciado interior */
+  text-align: center; /* Alineación de texto */
+  position: relative; /* Posición relativa para manejar elementos */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2); /* Sombra */
+}
+
+header h1 {
+  font-size: 28px; /* Tamaño del título */
+  margin-bottom: 10px; /* Margen inferior */
+}
+
+header p {
+  font-size: 15px; /* Tamaño de la descripción */
+  opacity: 0.9; /* Opacidad */
+}
+
+header button {
+  background: linear-gradient(to right, #00cec9, #6c5ce7); /* Fondo con gradiente */
+  border: none; /* Sin borde */
+  color: white; /* Color de texto */
+  padding: 10px 20px; /* Espaciado interior */
+  font-size: 15px; /* Tamaño de fuente */
+  cursor: pointer; /* Cursor en forma de mano */
+  margin-top: 12px; /* Margen superior */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3); /* Sombra */
+  transition: all 0.3s ease; /* Transición suave */
+}
+
+header button:hover {
+  transform: scale(1.05); /* Aumento de tamaño en hover */
+}
+
+/* ========================= MENÚ ========================= */
+/* Estilos para el menú */
+.menu {
+  background-color: #2d3436; /* Fondo del menú */
+  border-radius: 12px; /* Bordes redondeados */
+  box-shadow: none; /* Eliminar cualquier sombra extra */
+  margin: 15px 0; /* Asegurarse de que no haya márgenes innecesarios */
+  padding: 0 10px; /* Añadir un pequeño padding alrededor */
+  border: none; /* Eliminar el borde si se ha aplicado */
+}
+
+.menu ul {
+  display: flex; /* Muestra los elementos en línea */
+  justify-content: center; /* Centra los elementos */
+  list-style: none; /* Elimina los puntos de la lista */
+  flex-wrap: wrap; /* Permite que los elementos se ajusten al tamaño de pantalla */
+  margin: 0; /* Eliminar margen */
+  padding: 0; /* Eliminar padding */
+}
+
+.menu li a {
+  display: block;
+  padding: 10px 20px; /* Aseguramos que el padding sea consistente */
+  color: white;
+  font-weight: 500;
+  background: linear-gradient(to right, #6c5ce7, #00cec9); /* Fondo de gradiente */
+  border-radius: 8px; /* Bordes redondeados en los botones */
+  transition: background 0.3s, color 0.3s, transform 0.3s; /* Transición suave */
+  margin: 0 8px; /* Espacio horizontal entre los botones */
+  text-align: center; /* Centrar el texto dentro de los botones */
+  text-decoration: none; /* Eliminar subrayado */
+}
+
+.menu li a:hover {
+  background-color: #636e72; /* Color de fondo al pasar el cursor */
+  color: #00cec9; /* Color de texto al pasar el cursor */
+  transform: scale(1.05); /* Aumento de tamaño en hover */
+}
+
+/* Para que los botones tengan el mismo tamaño */
+.menu li a {
+  min-width: 120px; /* Ancho mínimo para los botones */
+  text-align: center; /* Asegura que el texto esté centrado */
+}
+
+/* ========================= CARRUSEL ========================= */
+/* Estilos para el carrusel de imágenes */
+.galery {
+  display: flex; /* Muestra los elementos en línea */
+  justify-content: center; /* Centra los elementos */
+  gap: 30px; /* Espaciado entre los elementos */
+  padding: 40px 20px; /* Espaciado interior */
+  margin-top: 30px; /* Margen superior */
+  width: 100%; /* Ancho completo */
+}
+
+.galery div {
+  width: 280px; /* Ancho de cada elemento */
+  height: 400px; /* Altura de cada elemento */
+  background-size: contain; /* Ajusta la imagen sin distorsionarla */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita la repetición de la imagen */
+  border-radius: 12px; /* Bordes redondeados */
+  transition: transform 0.5s ease; /* Transición de transformación */
+}
+
+.galery div:hover {
+  transform: scale(1.05); /* Aumento de tamaño al pasar el cursor */
+}
+
+/* Animación de las imágenes del carrusel */
+@keyframes carrusel {
+  0% { opacity: 1; }
+  33% { opacity: 0; }
+  66% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.galery div:nth-child(1) {
+  animation: carrusel 9s infinite; /* Animación del primer elemento */
+}
+
+.galery div:nth-child(2) {
+  animation: carrusel 9s infinite 3s; /* Animación del segundo elemento */
+}
+
+.galery div:nth-child(3) {
+  animation: carrusel 9s infinite 6s; /* Animación del tercer elemento */
+}
+
+/* ========================= PROMOCIONES ========================= */
+/* Estilos para las promociones */
+#promociones {
+  display: flex; /* Muestra los elementos en línea */
+  justify-content: space-between; /* Espacio entre los elementos */
+  padding: 40px 20px; /* Espaciado interior */
+  margin-top: 40px; /* Margen superior */
+}
+
+.promo-item {
+  width: 45%; /* Ancho de los elementos */
+  background: #2f2f3f; /* Fondo */
+  border-radius: 10px; /* Bordes redondeados */
+  padding: 20px; /* Espaciado interior */
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* Sombra */
+  color: #fff; /* Color de texto */
+  text-align: center; /* Alineación de texto */
+}
+
+.promo-item img {
+  width: 20%; /* Ancho de las imágenes */
+  height: auto; /* Altura automática */
+  border-radius: 8px; /* Bordes redondeados */
+  margin-bottom: 10px; /* Margen inferior */
+}
+
+/* ========================= CATEGORÍAS DE JUEGOS ========================= */
+/* Estilos para las categorías de juegos */
+.categorias {
+  padding: 30px; /* Espaciado interior */
+  display: flex; /* Muestra los elementos en línea */
+  flex-direction: column; /* Los elementos se apilan de arriba hacia abajo */
+  gap: 40px; /* Espaciado entre elementos */
+}
+
+.categoria {
+  background: #2c2c3c; /* Fondo */
+  border-radius: 20px; /* Bordes redondeados */
+  padding: 20px; /* Espaciado interior */
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4); /* Sombra */
+  display: flex; /* Muestra los elementos en línea */
+  flex-wrap: wrap; /* Los elementos pueden envolverse */
+  justify-content: center; /* Centra los elementos */
+  gap: 24px; /* Espaciado entre los elementos */
+  flex-direction: row; /* Los elementos se alinean en fila */
+}
+
+.categoria h3 {
+  font-size: 20px; /* Tamaño de fuente */
+  color: #00cec9; /* Color de texto */
+  margin-bottom: 20px; /* Margen inferior */
+  border-left: 5px solid #6c5ce7; /* Línea a la izquierda */
+  padding-left: 10px; /* Espaciado a la izquierda */
+  width: 100%; /* Ancho completo */
+}
+
+.juego {
+  width: 220px; /* Ancho de cada juego */
+  background-color: #ffffff0d; /* Fondo oscuro */
+  padding: 12px; /* Espaciado interior */
+  border-radius: 12px; /* Bordes redondeados */
+  transition: transform 0.3s, box-shadow 0.3s; /* Transición de transformación y sombra */
+  text-align: center; /* Alineación de texto */
+  color: #fff; /* Color de texto */
+}
+
+.juego:hover {
+  transform: scale(1.05); /* Aumento de tamaño en hover */
+  box-shadow: 0 0 12px #6c5ce7, 0 0 6px #00cec9; /* Sombra con color al pasar el cursor */
+}
+
+.juego img {
+  width: 100%; /* Ancho de la imagen */
+  height: auto; /* Altura automática */
+  border-radius: 8px; /* Bordes redondeados */
+  margin-bottom: 8px; /* Margen inferior */
+}
+
+/* ========================= FILTROS CATEGORÍAS ========================= */
+/* Estilo de los botones de categorías en los filtros */
+#filtros-categorias button {
+  background: linear-gradient(to right, #6c5ce7, #00cec9); /* Fondo de gradiente */
+  border-radius: 8px; /* Bordes redondeados */
+  color: white; /* Color de texto */
+  padding: 8px 16px; /* Espaciado interno */
+  font-size: 14px; /* Tamaño de fuente */
+  border: none; /* Eliminar borde */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra */
+  font-weight: bold; /* Peso de la fuente */
+  cursor: pointer; /* Cursor tipo mano */
+  transition: all 0.3s ease; /* Transición suave */
+  margin: 0 6px; /* Espacio entre los botones */
+}
+
+#filtros-categorias button:hover {
+  transform: scale(1.05); /* Aumenta el tamaño al pasar el cursor */
+  background: linear-gradient(to right, #00cec9, #6c5ce7); /* Invertir el gradiente en hover */
+}
+
+/* Estilo para el botón seleccionado */
+#filtros-categorias button:active {
+  background: linear-gradient(to right, #00cec9, #6c5ce7); /* Fondo invertido cuando se hace clic */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Sombra más fuerte */
+}
+
+/* ========================= DETALLE JUEGO MODAL ========================= */
+/* Estilos para el modal de detalle de juego */
+.detalle-juego {
+  position: fixed; /* Posición fija en la pantalla */
+  top: 50%; /* Posición centrada en el eje vertical */
+  left: 50%; /* Posición centrada en el eje horizontal */
+  transform: translate(-50%, -50%); /* Centrado exacto */
+  background: #2f2f3f; /* Fondo */
+  padding: 15px; /* Espaciado interior */
+  border-radius: 15px; /* Bordes redondeados */
+  box-shadow: 0 12px 32px rgba(0,0,0,0.5); /* Sombra */
+  z-index: 1000; /* Asegura que el modal esté encima de otros elementos */
+  width: 80%; /* Ancho del modal */
+  max-width: 520px; /* Ancho máximo */
+  color: #ffffff; /* Color de texto */
+  visibility: visible; /* Visible por defecto */
+  opacity: 1; /* Opacidad */
+}
+
+.detalle-juego img {
+  max-width: 150px; /* Tamaño máximo de la imagen */
+  height: auto; /* Altura automática */
+  border-radius: 8px; /* Bordes redondeados */
+  margin: 0 auto; /* Centra la imagen */
+  display: block; /* Hace que la imagen sea un bloque */
+}
+
+.detalle-juego button {
+  background: linear-gradient(to right, #6c5ce7, #00cec9); /* Fondo con gradiente */
+  color: white; /* Color de texto */
+  border: none; /* Sin borde */
+  padding: 12px 18px; /* Espaciado interior */
+  border-radius: 10px; /* Bordes redondeados */
+  cursor: pointer; /* Cursor en forma de mano */
+  font-weight: 600; /* Peso de la fuente */
+  margin-top: 12px; /* Margen superior */
+  transition: transform 0.3s ease; /* Transición */
+  display: inline-block; /* Bloque en línea */
+}
+
+.detalle-juego button:hover {
+  transform: scale(1.05); /* Aumento de tamaño en hover */
+}
+
+/* ========================= CARRITO ========================= */
+/* Estilos para el carrito de compras */
+.carrito {
+  background: #2c2c3c; /* Fondo */
+  position: fixed; /* Posición fija */
+  right: 20px; /* Alineación a la derecha */
+  top: 110px; /* Alineación superior */
+  padding: 20px; /* Espaciado interior */
+  border-radius: 16px; /* Bordes redondeados */
+  width: 300px; /* Ancho */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); /* Sombra */
+  z-index: 999; /* Asegura que esté encima de otros elementos */
+  color: #ffffffcc; /* Color de texto */
+}
+
+.carrito button {
+  background-color: #d63031; /* Fondo */
+  color: white; /* Color de texto */
+  border: none; /* Sin borde */
+  padding: 10px; /* Espaciado interior */
+  border-radius: 6px; /* Bordes redondeados */
+  margin-top: 10px; /* Margen superior */
+  cursor: pointer; /* Cursor en forma de mano */
+}
+
+.carrito button:hover {
+  background-color: #e17055; /* Cambio de color en hover */
+}
+
+/* ========================= AVISO CARRITO ========================= */
+/* Estilos para el aviso de carrito */
+#aviso-carrito {
+  position: fixed; /* Posición fija */
+  bottom: 20px; /* Alineación inferior */
+  right: 20px; /* Alineación derecha */
+  background: #00b894; /* Fondo */
+  color: white; /* Color de texto */
+  padding: 12px 20px; /* Espaciado interior */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2); /* Sombra */
+  font-weight: bold; /* Peso de la fuente */
+  z-index: 1000; /* Asegura que esté encima de otros elementos */
+}
+
+/* ========================= FORMULARIOS ========================= */
+/* Estilos para los formularios */
+form {
+  background: #2d2d3c; /* Fondo */
+  width: 450px; /* Ancho */
+  max-width: 95%; /* Ancho máximo */
+  margin: 30px auto; /* Centrados en la página */
+  padding: 30px; /* Espaciado interior */
+  border-radius: 16px; /* Bordes redondeados */
+  box-shadow: 0 12px 28px rgba(0,0,0,0.4); /* Sombra */
+}
+
+form input, form textarea, form button {
+  width: 100%; /* Ancho completo */
+  padding: 12px; /* Espaciado interior */
+  margin-bottom: 15px; /* Margen inferior */
+  font-size: 16px; /* Tamaño de fuente */
+  border: 1px solid #444; /* Borde */
+  border-radius: 8px; /* Bordes redondeados */
+  background: #3a3a4d; /* Fondo oscuro */
+  color: white; /* Color de texto */
+}
+
+form button {
+  background: linear-gradient(to right, #00cec9, #6c5ce7); /* Fondo con gradiente */
+  color: white; /* Color de texto */
+  font-weight: bold; /* Peso de la fuente */
+  border: none; /* Sin borde */
+}
+
+form button:hover {
+  transform: scale(1.03); /* Aumento de tamaño en hover */
+}
+
+/* ========================= SECCIÓN SERVICIOS ========================= */
+/* Estilos para los servicios */
+.servicios-container {
+  display: flex; /* Muestra los elementos en línea */
+  justify-content: center; /* Centra los elementos */
+  gap: 30px; /* Espaciado entre los elementos */
+  flex-wrap: wrap; /* Los elementos se ajustan */
+  padding: 40px 20px; /* Espaciado interior */
+}
+
+.servicio {
+  background: white; /* Fondo */
+  border-radius: 16px; /* Bordes redondeados */
+  width: 300px; /* Ancho */
+  padding: 25px; /* Espaciado interior */
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15); /* Sombra */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición de transformación y sombra */
+}
+
+.servicio:hover {
+  transform: translateY(-8px); /* Movimiento hacia arriba al pasar el cursor */
+  box-shadow: 0 12px 35px rgba(0,0,0,0.25); /* Sombra con mayor profundidad */
+}
+
+.servicio h2 {
+  color: #2d3436; /* Color de texto */
+  font-size: 18px; /* Tamaño de fuente */
+  margin-bottom: 12px; /* Margen inferior */
+}
+
+.servicio p {
+  font-size: 14px; /* Tamaño de fuente */
+  color: #555; /* Color de texto */
+  margin-bottom: 20px; /* Margen inferior */
+}
+
+.servicio button {
+  background: #8e44ad; /* Fondo */
+  color: white; /* Color de texto */
+  border: none; /* Sin borde */
+  padding: 10px 20px; /* Espaciado interior */
+  font-weight: 600; /* Peso de la fuente */
+  border-radius: 8px; /* Bordes redondeados */
+  cursor: pointer; /* Cursor en forma de mano */
+  transition: background 0.3s; /* Transición de fondo */
+}
+
+.servicio button:hover {
+  background: #6c3483; /* Cambio de fondo en hover */
+}
+
+/* ========================= CONTACTO ========================= */
+/* Estilos para la sección de contacto */
+#contacto {
+  max-width: 900px; /* Ancho máximo */
+  margin: 0 auto; /* Centrado */
+  padding: 40px 20px; /* Espaciado interior */
+  text-align: center; /* Alineación de texto */
+}
+
+#contacto img {
+  border-radius: 12px; /* Bordes redondeados */
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1); /* Sombra */
+  max-width: 100%; /* Ancho máximo */
+  height: auto; /* Altura automática */
+  margin-bottom: 25px; /* Margen inferior */
+}
+
+.contact-info {
+  margin-bottom: 30px; /* Margen inferior */
+}
+
+.contact-info p {
+  font-size: 16px; /* Tamaño de fuente */
+}
+
+/* ========================= FORMULARIO DE CONTACTO ========================= */
+/* Estilos del formulario de contacto */
+#contacto form {
+  display: inline-block; /* Alineación en bloque */
+  background: #fff; /* Fondo blanco */
+  padding: 25px; /* Espaciado interior */
+  border-radius: 16px; /* Bordes redondeados */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Sombra */
+  text-align: left; /* Alineación a la izquierda */
+  max-width: 400px; /* Ancho máximo */
+}
+
+/* ========================= FOOTER ========================= */
+/* Estilos para el pie de página */
+footer {
+  background-color: #2c3e50; /* Fondo */
+  color: white; /* Color de texto */
+  padding: 25px 20px; /* Espaciado interior */
+  text-align: center; /* Alineación de texto */
+}
+
+footer p {
+  font-size: 14px; /* Tamaño de fuente */
+}
+
+/* ========================= MEDIA QUERIES ========================= */
+/* Estilos responsivos para pantallas más pequeñas */
+
+/* Para pantallas de hasta 1024px */
+@media (max-width: 1024px) {
+  header h1 {
+    font-size: 26px; /* Tamaño de fuente */
+  }
+
+  .galery {
+    gap: 20px; /* Espaciado entre elementos */
+  }
+
+  .menu ul {
+    flex-direction: column; /* Coloca los elementos en columna */
+  }
+
+  .menu li a {
+    padding: 10px 15px; /* Ajuste de padding */
+  }
+
+  .categoria h3 {
+    font-size: 18px; /* Tamaño de fuente */
+  }
+
+  #promociones {
+    flex-direction: column; /* Coloca las promociones en columna */
+    gap: 20px; /* Espaciado entre elementos */
+  }
+
+  .carrito {
+    width: 80%; /* Ancho */
+  }
+}
+
+/* Para pantallas de hasta 768px */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 24px; /* Tamaño de fuente */
+  }
+
+  .galery div {
+    width: 100%; /* Ancho completo */
+    margin-bottom: 20px; /* Margen inferior */
+  }
+
+  .menu ul {
+    flex-direction: column; /* Coloca los elementos en columna */
+  }
+
+  .categoria {
+    flex-direction: column; /* Coloca las categorías en columna */
+    align-items: center; /* Centra los elementos */
+  }
+
+  .categoria h3 {
+    font-size: 18px; /* Tamaño de fuente */
+  }
+
+  .carrito {
+    width: 85%; /* Ancho */
+  }
+}
+
+/* Para pantallas de hasta 480px */
+@media (max-width: 480px) {
+  .galery div {
+    width: 100%; /* Ancho completo */
+  }
+
+  .menu li a {
+    padding: 12px 15px; /* Ajuste de padding */
+    font-size: 14px; /* Tamaño de fuente */
+  }
+
+  .carrito {
+    width: 100%; /* Ancho completo */
+    bottom: 0; /* Alineación inferior */
+    left: 0; /* Alineación izquierda */
+    box-shadow: none; /* Elimina la sombra */
+  }
+}
+
+/* ========================= ESTILOS ESPECÍFICOS PARA ADMIN.HTML ========================= */
+/* Agregamos estilos particulares para el panel de administrador */
+#historial-compras,
+#editor-productos {
+  max-width: 800px;
+  margin: 20px auto;
+  text-align: left;
+}
+
+#historial-compras h2,
+#editor-productos h2 {
+  color: #00cec9;
+  border-bottom: 2px solid #6c5ce7;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+#editor-productos input {
+  width: calc(50% - 10px);
+  margin-right: 10px;
+  padding: 8px;
+  font-size: 16px;
+}
+
+#editor-productos button {
+  background: #00cec9;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s;
+}
+
+#editor-productos button:hover {
+  background: #6c5ce7;
+}
+
+/* Responsividad para el panel de administrador */
+@media (max-width: 768px) {
+  #editor-productos input {
+    width: 100%;
+    margin: 5px 0;
+  }
+}

@@ -1,0 +1,197 @@
+<!-- 9.-admin.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Administrador</title>
+  <link rel="stylesheet" href="principal.css">
+  <style>
+    /* Estilos específicos para el panel de administrador */
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    h1, h2, h3 { color: #333; }
+    .producto { margin-bottom: 10px; }
+    .producto input { margin-right: 5px; }
+    .btn { padding: 5px 10px; cursor: pointer; margin-top: 10px; }
+    
+    /* Estilos para secciones del panel */
+    #historial-compras,
+    #editor-productos {
+      max-width: 800px;
+      margin: 20px auto;
+      text-align: left;
+    }
+    
+    /* Encabezados */
+    #historial-compras h2,
+    #editor-productos h2 {
+      color: #00cec9;
+      border-bottom: 2px solid #6c5ce7;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+    
+    /* Inputs para el editor de productos */
+    #editor-productos input {
+      width: calc(50% - 10px);
+      margin-right: 10px;
+      padding: 8px;
+      font-size: 16px;
+    }
+    
+    /* Botón agregar producto */
+    #editor-productos button {
+      background: #00cec9;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.3s;
+    }
+    
+    #editor-productos button:hover {
+      background: #6c5ce7;
+    }
+    
+    /* Responsividad para el editor */
+    @media (max-width: 768px) {
+      #editor-productos input {
+        width: 100%;
+        margin: 5px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Panel de Administrador</h1>
+
+  <!-- Sección de historial de compras -->
+  <div id="historial-compras">
+    <h2>Historial de Compras de Todos los Usuarios</h2>
+    <!-- El contenido se llenará de forma dinámica -->
+  </div>
+
+  <hr>
+
+  <!-- Sección para editar productos -->
+  <div id="editor-productos">
+    <h2>Editor de Productos</h2>
+    <input id="nuevo-nombre" placeholder="Nombre del producto">
+    <input id="nuevo-precio" placeholder="Precio">
+    <button class="btn" onclick="agregarProducto()">Agregar Producto</button>
+    <div id="lista-productos"></div>
+  </div>
+
+  <button class="btn" onclick="cerrarSesion()">Cerrar sesión</button>
+
+  <!-- Sección de script con funciones específicas para admin -->
+  <script>
+    // Al cargar la página, verificar que el usuario sea administrador
+    window.onload = function() {
+      const user = JSON.parse(localStorage.getItem("usuario_actual"));
+      if (!user || user.rol !== "admin") {
+        alert("Acceso denegado. Inicia sesión como administrador.");
+        window.location.href = "registro.html";
+        return;
+      }
+      // Mostrar historial y lista de productos
+      mostrarHistorialCompleto();
+      mostrarProductos();
+    };
+
+    // Función para mostrar el historial de compras de todos los usuarios registrados
+    function mostrarHistorialCompleto() {
+      const historialDiv = document.getElementById("historial-compras");
+      historialDiv.innerHTML = "<h2>Historial de Compras de Todos los Usuarios</h2>";
+      // Recorremos todas las claves del localStorage para buscar usuarios registrados
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        // Consideramos las claves que comienzan con "usuario_" y que no son "usuario_actual"
+        if (key.startsWith("usuario_") && key !== "usuario_actual") {
+          const userData = JSON.parse(localStorage.getItem(key));
+          if (userData.historial && userData.historial.length > 0) {
+            historialDiv.innerHTML += `<h4>Historial de ${userData.nombre} (${userData.email})</h4><ul>`;
+            userData.historial.forEach(compra => {
+              let compraHTML = `<li>Fecha: ${compra.fecha} - Total: ${compra.total} Bs<ul>`;
+              compra.productos.forEach(prod => {
+                compraHTML += `<li>${prod.titulo} - ${prod.precio} Bs</li>`;
+              });
+              compraHTML += `</ul></li>`;
+              historialDiv.innerHTML += compraHTML;
+            });
+            historialDiv.innerHTML += "</ul>";
+          }
+        }
+      }
+      if (historialDiv.innerHTML.trim() === "<h2>Historial de Compras de Todos los Usuarios</h2>") {
+        historialDiv.innerHTML += "<p>No hay compras registradas.</p>";
+      }
+    }
+
+    // Función para agregar un nuevo producto
+    function agregarProducto() {
+      const nombre = document.getElementById("nuevo-nombre").value;
+      const precio = document.getElementById("nuevo-precio").value;
+      if (!nombre || !precio) {
+        alert("Por favor completa ambos campos.");
+        return;
+      }
+      const producto = { nombre: nombre, precio: precio };
+      let productos = JSON.parse(localStorage.getItem("productos")) || [];
+      productos.push(producto);
+      localStorage.setItem("productos", JSON.stringify(productos));
+      mostrarProductos();
+      document.getElementById("nuevo-nombre").value = "";
+      document.getElementById("nuevo-precio").value = "";
+    }
+
+    // Función para mostrar la lista de productos en el editor
+    function mostrarProductos() {
+      let productos = JSON.parse(localStorage.getItem("productos")) || [];
+      const lista = document.getElementById("lista-productos");
+      lista.innerHTML = "<h3>Productos Existentes</h3>";
+      productos.forEach((producto, index) => {
+        lista.innerHTML += `
+          <div class="producto">
+            <input value="${producto.nombre}" onchange="editarNombre(${index}, this.value)">
+            <input value="${producto.precio}" onchange="editarPrecio(${index}, this.value)">
+            <button class="btn" onclick="eliminarProducto(${index})">Eliminar</button>
+          </div>
+        `;
+      });
+    }
+
+    // Función para editar el nombre de un producto
+    function editarNombre(index, nuevoNombre) {
+      let productos = JSON.parse(localStorage.getItem("productos")) || [];
+      productos[index].nombre = nuevoNombre;
+      localStorage.setItem("productos", JSON.stringify(productos));
+      mostrarProductos();
+    }
+
+    // Función para editar el precio de un producto
+    function editarPrecio(index, nuevoPrecio) {
+      let productos = JSON.parse(localStorage.getItem("productos")) || [];
+      productos[index].precio = nuevoPrecio;
+      localStorage.setItem("productos", JSON.stringify(productos));
+      mostrarProductos();
+    }
+
+    // Función para eliminar un producto
+    function eliminarProducto(index) {
+      let productos = JSON.parse(localStorage.getItem("productos")) || [];
+      productos.splice(index, 1);
+      localStorage.setItem("productos", JSON.stringify(productos));
+      mostrarProductos();
+    }
+
+    // Función para cerrar sesión
+    function cerrarSesion() {
+      localStorage.removeItem("usuario_actual");
+      window.location.href = "registro.html";
+    }
+  </script>
+</body>
+</html>
